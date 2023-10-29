@@ -1,10 +1,56 @@
-type Query {
-    bookByLastName(lastName: String): Customer
+type Address {
+    building: String!
+    coord: [Float!]!
+    street: String!
+    zipcode: String!
 }
 
-type Customer {
+type Grade {
+    date: String!
+    grade: String!
+    score: Int!
+}
+
+type Restaurant {
     id: ID!
-    firstName: String!
-    lastName: String!
+    address: Address!
+    borough: String!
+    cuisine: String!
+    grades: [Grade!]!
+    name: String!
+    restaurantId: String!
 }
 
+type Query {
+    restaurants: [Restaurant]!
+}
+
+type Mutation {
+    createRestaurant(
+        address: AddressInput!
+        borough: String!
+        cuisine: String!
+        grades: [GradeInput!]!
+        name: String!
+        restaurantId: String!
+    ): Restaurant!
+}
+
+input AddressInput {
+    building: String!
+    coord: [Float!]!
+    street: String!
+    zipcode: String!
+}
+
+input GradeInput {
+    #    date: DateInput!
+    grade: String!
+    score: Int!
+}
+#
+#input DateInput {
+#    year: Int!
+#    month: Int!
+#    day: Int!
+#}
